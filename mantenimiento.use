@@ -1,0 +1,165 @@
+model monitorMantenimiento
+
+--Clases
+
+class CRA
+  operations
+  errorDetected(v:Vehiculo, a:Atraccion)
+    begin
+      --La CRA busca un operario de mantenimiento disponible
+      if self.dispositivos->select(d|d.isAvailable)->size()>0 then
+        self.dispositivos->select(d|d.isAvailable)->asSequence()->first().fixVehicle(v,a);
+      else
+        v.signalNotAttended()
+      end
+    end
+
+    pre AtraccionNoFunciona: a.working=false
+    pre VehiculoNoFunciona: v.isWorking=false
+    pre VehiculoNoEstaSiendoAtendido : v.arregla->select(a|a.fixed=false)->size()=0
+    pre VehiculoSinSenal: v. signalWaitingOperator =false
+
+
+  revisionComplete(o:Operario, a:Atraccion)
+end
+
+class Dispositivo
+  attributes
+    avisosResueltos: Integer derive=self.arregla->select(a|a.fixed)->size()
+    isAvailable: Boolean derive=self.arregla.exists(a|not a.fixed)
+  operations
+    fixVehicle(v:Vehiculo, a:Atraccion)
+      begin
+      end
+    finishRevision()
+      begin
+      end
+  statemachines
+    psm Free
+      states
+        s:initial
+        Occupied[not self.isAvailable]
+        Free[self.isAvailable]
+      transitions
+       s->Free
+       Free->Occupied{fixVehicle()}
+       Occupied->Free{finishRevision()}
+  end
+end
+
+class Operario
+  operations
+
+end
+
+class Atraccion
+  attributes
+    street: String
+    working: Boolean
+  operations
+    allWorking():Boolean = self.vehiculos->forAll(v|v.isWorking)
+    errorDetected(v:Vehiculo)
+      begin
+       self.working := false
+      end
+    pre isMine:self.vehiculos->exists(c| c=v)
+    pre isBroken: v.isWorking=false
+    post stop: self.working = false
+
+    revisionComplete(v:Vehiculo)
+      begin
+       if self.vehiculos->forAll(c|c.isWorking=true) then
+           self.working := true;
+       end
+      end
+    pre isMine: self.vehiculos->exists(c| c=v)
+    pre isFixed: v.isWorking=true
+    post state: if self.vehiculos->forAll(c|c.isWorking=true) then self.working = true else self.working = false endif
+
+  statemachines
+    psm Working
+      states
+        s:initial
+        Working [self.working]
+        Broken [not self.working]
+      transitions
+        s->Working
+        Working->Broken {errorDetected()}
+        Broken->Working {[self.allWorking()] revisionComplete()}
+        Broken->Broken {[not self.allWorking()] revisionComplete()}
+    end
+end
+
+class Noria < Atraccion
+end
+
+class Rusa < Atraccion
+end
+
+class Vehiculo
+  attributes
+    number: Integer
+    isWorking: Boolean
+    signalWaitingOperator: Boolean init: false
+  operations
+    signalNotAttended()
+      begin
+      end
+    errorDetected()
+      begin
+      end
+    revisionComplete()
+  statemachines
+    psm Broken
+      states
+        s:initial
+        Working [self.isWorking]
+        Broken [not self.isWorking]
+        Waiting [not self.isWorking and self.signalWaitingOperator]
+      transitions
+        s->Working
+        Working->Broken {errorDetected()}
+        Broken->Waiting {signalNotAttended()}
+        Broken->Working {revisionComplete()}
+        Waiting->Working {revisionComplete()}
+    end
+end
+
+class Arregla
+  attributes
+    fixed: Boolean init: false
+end
+
+--Relaciones
+
+association ArreglaVehiculo between
+  Arregla [*] role arregla
+  Vehiculo [1] role vehiculo
+end
+
+association ArreglaDispositivo between
+  Arregla [*] role arregla
+  Dispositivo [1] role dispositivo
+end
+
+composition AtraccionVehiculo between
+  Atraccion [1] role atraccion
+  Vehiculo [1..*] role vehiculos
+end
+
+association Monitoriza between
+  CRA [1] role cra
+  Atraccion [*] role atraccion
+end
+
+composition Administracion between
+  CRA [1] role cra
+  Dispositivo [1..*] role dispositivos
+end
+
+association DispositivoOperario between
+  Dispositivo [1] role dispositivo
+  Operario [1] role operario
+end
+
+constraints
