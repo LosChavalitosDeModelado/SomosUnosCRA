@@ -38,6 +38,10 @@ class Dispositivo
       pre DispositivoDisponible : self. isAvailable=true
 
       post VehiculoConUnArreglaMas: self.avisosResueltos =self.avisosResueltos@pre + 1
+      post HayUnArreglaActivo: v.arregla->select(a|a.fixed=false)->size()=1
+      post OperarioDisponible: self.isAvailable=false
+      post VehiculoNoFunciona: v.isWorking=false
+      post AtraccionNoFunciona: a.working=false
        
 	
 
