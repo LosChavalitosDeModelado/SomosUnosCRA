@@ -21,6 +21,7 @@ class CRA
 
 
   revisionComplete(o:Operario, a:Atraccion)
+	
 end
 
 class Dispositivo
@@ -31,6 +32,16 @@ class Dispositivo
     fixVehicle(v:Vehiculo, a:Atraccion)
       begin
       end
+      pre VehiculoNoFuncionando: v.isWorking=false
+      pre AtraccionNoFuncionando: a.working=false
+      pre VehiculoNoEstaSiendoAtendido : v.arregla->select(a|a.fixed=false)->size()=0
+      pre DispositivoDisponible : self. isAvailable=true
+
+      pos VehiculoConUnArreglaMas: self.avisosResueltos =self.avisosResueltos@pre+1
+      pos 
+	
+
+
     finishRevision()
       begin
       end
