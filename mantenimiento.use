@@ -54,7 +54,20 @@ class Dispositivo
 
     finishRevision()
       begin
+	self.isAvailable:=false;
+	self.arregla->select(a|a.fixed=false)->asSequence()->first().vehiculo.revisionComplete();
+	self.arregla->select(a|a.fixed=false)->asSequence()->first().fixed:=true;
+	
       end
+      pre OperarioArreglando: self.isAvailable=false
+      pre UnArreglaActivo: self.arregla->select(a|a.fixed=false)->size()=1
+      pre VehiculoNoFuncionando: self.arregla->select(a|a.fixed=false)->asSequence()->first().vehiculo.isWorking=false
+      pre AtraccionNoFuncionando :self.arregla->select(a|a.fixed=false)->asSequence()->first().vehiculo.atraccion.working=false
+
+      post NoArreglaPendiente:self.arregla->select(a|a.fixed=false)->size()=0
+      
+      
+      
   statemachines
     psm Free
       states
@@ -130,6 +143,8 @@ class Vehiculo
       begin
       end
     revisionComplete()
+      begin
+      end
   statemachines
     psm Broken
       states
