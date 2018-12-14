@@ -139,7 +139,19 @@ class Vehiculo
   operations
     signalNotAttended()
       begin
+	self.signalWaitingOperator:=true;
+	
       end
+      pre VehiculoNofunciona: self.isWorking =false
+      pre VehiculoSinSenal : self.signalWaitingOperator=false
+      pre NoArreglasActivos : self.arregla->select(a|a.fixed=false)->size()=0
+      pre AtraccionNoFunciona: self.atraccion.working=false
+
+      post SenalActiva: self.signalWaitingOperator=true
+      post VehiculoNofuncionaTodavia: self.isWorking =false
+      post AtraccionNoFuncionaTodavia: self.atraccion.working=false
+      post NoArreglasActivosTodavia: self.arregla->select(a|a.fixed=false)->size()=0
+
       
     errorDetected()
       begin
@@ -147,8 +159,8 @@ class Vehiculo
 	self.atraccion.errorDetected(self)
       end
       pre VehiculoFuncionando: self.isWorking=true
-      pre VehiculoSinSenas: self.signalWaitingOperator=false
-      pre NoArreglaActivos:self.arregla->select(a|a.fixed=false)->size()=0
+      pre VehiculoSinSenal: self.signalWaitingOperator=false
+      pre NoArreglasActivos:self.arregla->select(a|a.fixed=false)->size()=0
       post VehiculoNoFuncionando: self.isWorking=false
       post AtraccionNoFuncionando: self.atraccion.working=false
       
