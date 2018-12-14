@@ -21,6 +21,7 @@ class CRA
 
 
   revisionComplete(o:Operario, a:Atraccion)
+     
 	
 end
 
@@ -139,9 +140,19 @@ class Vehiculo
     signalNotAttended()
       begin
       end
+      
     errorDetected()
       begin
+	self.isWorking:=false;
+	self.atraccion.errorDetected(self)
       end
+      pre VehiculoFuncionando: self.isWorking=true
+      pre VehiculoSinSenas: self.signalWaitingOperator=false
+      pre NoArreglaActivos:self.arregla->select(a|a.fixed=false)->size()=0
+      post VehiculoNoFuncionando: self.isWorking=false
+      post AtraccionNoFuncionando: self.atraccion.working=false
+      
+      
     revisionComplete()
       begin
       end
