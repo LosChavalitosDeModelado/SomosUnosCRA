@@ -167,7 +167,30 @@ class Vehiculo
       
     revisionComplete()
       begin
+	self.isWorking:=true
+  	
+
       end
+      pre NoArreglasActivos: self.arregla->select(a|a.fixed=false)->size()=0
+      pre VehiculoSiendoAtendido:self.signalWaitingOperator=false
+      post VehiculoFuncionando : self.isWorking=true
+      post NoSenalActiva: self.signalWaitingOperator=false
+      
+    senalAtendida()
+      begin
+	self.signalWaitingOperator:=false
+      end
+      pre VehiculoNoFunciona :self.isWorking=false
+      pre SenalNoAtendida :self.signalWaitingOperator=true
+      pre OperarioAsignado:self.arregla->select(a|a.fixed=false)->size()=1
+      pre AtraccionNoFunciona :self.atraccion.working=false
+      
+      post SenalAtendida: self.signalWaitingOperator=false
+      pre VehiculoNoFuncionaTodavia :self.isWorking=false
+      pre AtraccionNoFuncionaTodavia :self.atraccion.working=false
+      pre OperarioAsignadoTodavia:self.arregla->select(a|a.fixed=false)->size()=1
+      
+	
   statemachines
     psm Broken
       states
