@@ -31,6 +31,12 @@ class Dispositivo
   operations
     fixVehicle(v:Vehiculo, a:Atraccion)
       begin
+	declare ar:Arregla;
+	ar:= new Arregla;
+	self.isAvailable :=false;
+	insert (ar,v) into ArreglaVehiculo;
+	insert (ar,self) into ArreglaDispositivo;
+	
       end
       pre VehiculoNoFuncionando: v.isWorking=false
       pre AtraccionNoFuncionando: a.working=false
