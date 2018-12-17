@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_e9IusAIdEemq4foq0apf6g" name="ParqueDeAtracciones">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_fNe30AIdEemq4foq0apf6g">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_17oDsAIdEemq4foq0apf6g" name="CRA">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_-9kzEAIiEemq4foq0apf6g" name="errorDetected">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_-9kzEQIiEemq4foq0apf6g" name="v" type="_-yC1UAIeEemq4foq0apf6g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_-9kzEgIiEemq4foq0apf6g" name="a" type="__0C6UAIdEemq4foq0apf6g"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_f0fJQAIkEemq4foq0apf6g" name="revisionComplete">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_f0fJQQIkEemq4foq0apf6g" name="v" type="_-yC1UAIeEemq4foq0apf6g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_f0fJQgIkEemq4foq0apf6g" name="a" type="__0C6UAIdEemq4foq0apf6g"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="__0C6UAIdEemq4foq0apf6g" name="Atraccion">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_BYxVEAIhEemq4foq0apf6g" name="street" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ks04kAIhEemq4foq0apf6g" name="working" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_pdDGUAIhEemq4foq0apf6g" name="allWorking"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_u10FUAIiEemq4foq0apf6g" name="errorDetected">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_u10FUQIiEemq4foq0apf6g" name="v" type="_-yC1UAIeEemq4foq0apf6g"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_yRVJ8AIiEemq4foq0apf6g" name="revisionComplete">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_yRVJ8QIiEemq4foq0apf6g" name="v" type="_-yC1UAIeEemq4foq0apf6g"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_DOV28AIeEemq4foq0apf6g" name="Dispositivo">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_r2uMEAIkEemq4foq0apf6g" name="avisosResueltos" visibility="private" isDerived="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_wp6OQAIkEemq4foq0apf6g" name="isAvailable" visibility="private" isDerived="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_3BGZ0AIkEemq4foq0apf6g" name="fixVehicle">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_3BGZ0QIkEemq4foq0apf6g" name="v" type="_-yC1UAIeEemq4foq0apf6g"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_3BGZ0gIkEemq4foq0apf6g" name="a" type="__0C6UAIdEemq4foq0apf6g"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_5g1LoAIkEemq4foq0apf6g" name="finishRevision"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_H2pe0AIeEemq4foq0apf6g" name="Operario"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_MpBosAIeEemq4foq0apf6g" name="Arregla">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_E4u4AAIlEemq4foq0apf6g" name="fixes" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_elkt0AIeEemq4foq0apf6g" name="Noria">
+    <generalization xmi:type="uml:Generalization" xmi:id="_JirJgAIjEemq4foq0apf6g" general="__0C6UAIdEemq4foq0apf6g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_6kM74AIeEemq4foq0apf6g" name="Rusa">
+    <generalization xmi:type="uml:Generalization" xmi:id="_ZJbb8AIjEemq4foq0apf6g" general="__0C6UAIdEemq4foq0apf6g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-yC1UAIeEemq4foq0apf6g" name="Vehiculo">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_OWjFAAIfEemq4foq0apf6g" name="number" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_GGSpkAIgEemq4foq0apf6g" name="isWorking" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_g29PsAIgEemq4foq0apf6g" name="signalWaitingOperator" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_IiYcEAIhEemq4foq0apf6g" name="signalNotAttended"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_NNqfcAIhEemq4foq0apf6g" name="errorDetected"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_PZp14AIhEemq4foq0apf6g" name="revisionComplete"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_RK0RgAIhEemq4foq0apf6g" name="signalAttended"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_jLMw8AIlEemq4foq0apf6g" name="DispositivoOperario" memberEnd="_jLN_EgIlEemq4foq0apf6g _jLOmIAIlEemq4foq0apf6g">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_jLN_EAIlEemq4foq0apf6g" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_jLN_EQIlEemq4foq0apf6g" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_jLN_EgIlEemq4foq0apf6g" name="operario" type="_H2pe0AIeEemq4foq0apf6g" association="_jLMw8AIlEemq4foq0apf6g"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_jLOmIAIlEemq4foq0apf6g" name="dispositivo" type="_DOV28AIeEemq4foq0apf6g" association="_jLMw8AIlEemq4foq0apf6g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_6RVmEAIlEemq4foq0apf6g" name="Administracion" memberEnd="_6RWNIgIlEemq4foq0apf6g _6RW0MAIlEemq4foq0apf6g">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_6RWNIAIlEemq4foq0apf6g" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_6RWNIQIlEemq4foq0apf6g" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_6RWNIgIlEemq4foq0apf6g" name="cra" type="_17oDsAIdEemq4foq0apf6g" association="_6RVmEAIlEemq4foq0apf6g"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_6RW0MAIlEemq4foq0apf6g" name="dispositivo" type="_DOV28AIeEemq4foq0apf6g" aggregation="composite" association="_6RVmEAIlEemq4foq0apf6g">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_A_uJoAImEemq4foq0apf6g" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_A_5IwAImEemq4foq0apf6g" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_FW6zYAImEemq4foq0apf6g" name="Monitoriza" memberEnd="_FW7acgImEemq4foq0apf6g _FW8BgAImEemq4foq0apf6g">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_FW7acAImEemq4foq0apf6g" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_FW7acQImEemq4foq0apf6g" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_FW7acgImEemq4foq0apf6g" name="atraccion" type="__0C6UAIdEemq4foq0apf6g" association="_FW6zYAImEemq4foq0apf6g">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IfAlsAImEemq4foq0apf6g"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IfGFQAImEemq4foq0apf6g" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_FW8BgAImEemq4foq0apf6g" name="cra" type="_17oDsAIdEemq4foq0apf6g" association="_FW6zYAImEemq4foq0apf6g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PMFhsAImEemq4foq0apf6g" name="ArreglaVehiculo" memberEnd="_PMGIwgImEemq4foq0apf6g _PMGv0AImEemq4foq0apf6g">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_PMGIwAImEemq4foq0apf6g" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_PMGIwQImEemq4foq0apf6g" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PMGIwgImEemq4foq0apf6g" name="vehiculo" type="_-yC1UAIeEemq4foq0apf6g" association="_PMFhsAImEemq4foq0apf6g"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PMGv0AImEemq4foq0apf6g" name="arregla" type="_MpBosAIeEemq4foq0apf6g" association="_PMFhsAImEemq4foq0apf6g">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_S5FX4AImEemq4foq0apf6g"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_S5KQYAImEemq4foq0apf6g" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_XNRw8AImEemq4foq0apf6g" name="AtraccionVehiculo" memberEnd="_XNSYAgImEemq4foq0apf6g _XNS_EAImEemq4foq0apf6g">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XNSYAAImEemq4foq0apf6g" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XNSYAQImEemq4foq0apf6g" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_XNSYAgImEemq4foq0apf6g" name="vehiculo" type="_-yC1UAIeEemq4foq0apf6g" aggregation="composite" association="_XNRw8AImEemq4foq0apf6g"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_XNS_EAImEemq4foq0apf6g" name="atraccion" type="__0C6UAIdEemq4foq0apf6g" association="_XNRw8AImEemq4foq0apf6g"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_5OAEUAImEemq4foq0apf6g" name="ArreglaDispositivo" memberEnd="_5OB5ggImEemq4foq0apf6g _5ODusAImEemq4foq0apf6g">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_5OB5gAImEemq4foq0apf6g" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_5OB5gQImEemq4foq0apf6g" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_5OB5ggImEemq4foq0apf6g" name="arregla" type="_MpBosAIeEemq4foq0apf6g" association="_5OAEUAImEemq4foq0apf6g">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7_f7kAImEemq4foq0apf6g"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7_mCMAImEemq4foq0apf6g" value="*"/>
+    </ownedEnd>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_5ODusAImEemq4foq0apf6g" name="dispositivo" type="_DOV28AIeEemq4foq0apf6g" association="_5OAEUAImEemq4foq0apf6g"/>
+  </packagedElement>
+</uml:Model>
