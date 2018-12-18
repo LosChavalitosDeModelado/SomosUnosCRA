@@ -10,39 +10,12 @@
         <showrolenames>true</showrolenames>
         <showgrid>false</showgrid>
     </diagramOptions>
-    <node id="Working" sizeCalculated="true" type="StateNode">
-        <name>Working</name>
-        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
-            <x>34.005049711207235</x>
-            <y>140.65098694391406</y>
-        </strategy>
-        <showInvariant>true</showInvariant>
-        <hidden>false</hidden>
-    </node>
-    <node id="Broken" sizeCalculated="true" type="StateNode">
-        <name>Broken</name>
-        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
-            <x>21.53849420572169</x>
-            <y>343.10537075467175</y>
-        </strategy>
-        <showInvariant>true</showInvariant>
-        <hidden>false</hidden>
-    </node>
-    <node id="Waiting" sizeCalculated="true" type="StateNode">
-        <name>Waiting</name>
-        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
-            <x>618.4526856111938</x>
-            <y>207.9144721222268</y>
-        </strategy>
-        <showInvariant>true</showInvariant>
-        <hidden>false</hidden>
-    </node>
     <node height="14.0" id="s" sizeCalculated="false"
         type="PseudoStateNode" width="14.0">
         <name>s</name>
         <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
-            <x>63.2355031011063</x>
-            <y>64.1631788277078</y>
+            <x>7.235503101106303</x>
+            <y>68.1631788277078</y>
         </strategy>
         <node id="s::StateName" sizeCalculated="true" type="StateName">
             <name>s</name>
@@ -62,63 +35,33 @@
         </node>
         <hidden>false</hidden>
     </node>
-    <edge type="Transition">
-        <source>Working</source>
-        <target>Broken</target>
-        <name>errorDetected()/</name>
-        <waypoints>
-            <edgeproperty
-                id="transition::Working::Broken::::WayPoint::0"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>0</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>0</id>
-                <specialid>1</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="transition::Working::Broken::::WayPoint::1"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>1</id>
-                <specialid>2</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-        </waypoints>
+    <node id="Working" sizeCalculated="true" type="StateNode">
+        <name>Working</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>65.00504971120722</x>
+            <y>43.65098694391406</y>
+        </strategy>
+        <showInvariant>true</showInvariant>
         <hidden>false</hidden>
-        <Transitions>
-            <Transition>
-                <trigger>errorDetected()</trigger>
-                <guard/>
-                <post/>
-                <edgeproperty id="errorDetected()/"
-                    sizeCalculated="true" type="TransitionLabel"
-                    userDefined="false" visible="true">
-                    <name>errorDetected()/</name>
-                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                        <userOffsetX>0.0</userOffsetX>
-                        <userOffsetY>0.0</userOffsetY>
-                        <offsetX>0.0</offsetX>
-                        <offsetY>10.0</offsetY>
-                        <related length="2">
-                            <related0>transition::Working::Broken::::WayPoint::0</related0>
-                            <related1>transition::Working::Broken::::WayPoint::1</related1>
-                        </related>
-                    </strategy>
-                    <hidden>false</hidden>
-                </edgeproperty>
-            </Transition>
-        </Transitions>
-    </edge>
+    </node>
+    <node id="Broken" sizeCalculated="true" type="StateNode">
+        <name>Broken</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>54.53849420572169</x>
+            <y>179.10537075467175</y>
+        </strategy>
+        <showInvariant>true</showInvariant>
+        <hidden>false</hidden>
+    </node>
+    <node id="Waiting" sizeCalculated="true" type="StateNode">
+        <name>Waiting</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>360.45268561119383</x>
+            <y>174.9144721222268</y>
+        </strategy>
+        <showInvariant>true</showInvariant>
+        <hidden>false</hidden>
+    </node>
     <edge type="Transition">
         <source>s</source>
         <target>Working</target>
@@ -166,6 +109,63 @@
                         <related length="2">
                             <related0>transition::s::Working::::WayPoint::0</related0>
                             <related1>transition::s::Working::::WayPoint::1</related1>
+                        </related>
+                    </strategy>
+                    <hidden>false</hidden>
+                </edgeproperty>
+            </Transition>
+        </Transitions>
+    </edge>
+    <edge type="Transition">
+        <source>Working</source>
+        <target>Broken</target>
+        <name>errorDetected()/</name>
+        <waypoints>
+            <edgeproperty
+                id="transition::Working::Broken::::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="transition::Working::Broken::::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <Transitions>
+            <Transition>
+                <trigger>errorDetected()</trigger>
+                <guard/>
+                <post/>
+                <edgeproperty id="errorDetected()/"
+                    sizeCalculated="true" type="TransitionLabel"
+                    userDefined="true" visible="true">
+                    <name>errorDetected()/</name>
+                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                        <userOffsetX>-52.0</userOffsetX>
+                        <userOffsetY>-14.0</userOffsetY>
+                        <offsetX>0.0</offsetX>
+                        <offsetY>10.0</offsetY>
+                        <related length="2">
+                            <related0>transition::Working::Broken::::WayPoint::0</related0>
+                            <related1>transition::Working::Broken::::WayPoint::1</related1>
                         </related>
                     </strategy>
                     <hidden>false</hidden>
@@ -231,6 +231,63 @@
         </Transitions>
     </edge>
     <edge type="Transition">
+        <source>Waiting</source>
+        <target>Broken</target>
+        <name>signalAttended()/</name>
+        <waypoints>
+            <edgeproperty
+                id="transition::Waiting::Broken::::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="transition::Waiting::Broken::::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <Transitions>
+            <Transition>
+                <trigger>signalAttended()</trigger>
+                <guard/>
+                <post/>
+                <edgeproperty id="signalAttended()/"
+                    sizeCalculated="true" type="TransitionLabel"
+                    userDefined="true" visible="true">
+                    <name>signalAttended()/</name>
+                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                        <userOffsetX>5.0</userOffsetX>
+                        <userOffsetY>-23.0</userOffsetY>
+                        <offsetX>0.0</offsetX>
+                        <offsetY>10.0</offsetY>
+                        <related length="2">
+                            <related0>transition::Waiting::Broken::::WayPoint::0</related0>
+                            <related1>transition::Waiting::Broken::::WayPoint::1</related1>
+                        </related>
+                    </strategy>
+                    <hidden>false</hidden>
+                </edgeproperty>
+            </Transition>
+        </Transitions>
+    </edge>
+    <edge type="Transition">
         <source>Broken</source>
         <target>Working</target>
         <name>revisionComplete()/</name>
@@ -270,73 +327,16 @@
                 <post/>
                 <edgeproperty id="revisionComplete()/"
                     sizeCalculated="true" type="TransitionLabel"
-                    userDefined="false" visible="true">
+                    userDefined="true" visible="true">
                     <name>revisionComplete()/</name>
                     <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                        <userOffsetX>0.0</userOffsetX>
-                        <userOffsetY>0.0</userOffsetY>
+                        <userOffsetX>69.0</userOffsetX>
+                        <userOffsetY>-14.0</userOffsetY>
                         <offsetX>0.0</offsetX>
                         <offsetY>10.0</offsetY>
                         <related length="2">
                             <related0>transition::Broken::Working::::WayPoint::0</related0>
                             <related1>transition::Broken::Working::::WayPoint::1</related1>
-                        </related>
-                    </strategy>
-                    <hidden>false</hidden>
-                </edgeproperty>
-            </Transition>
-        </Transitions>
-    </edge>
-    <edge type="Transition">
-        <source>Waiting</source>
-        <target>Working</target>
-        <name>revisionComplete()/</name>
-        <waypoints>
-            <edgeproperty
-                id="transition::Waiting::Working::::WayPoint::0"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>0</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>0</id>
-                <specialid>1</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="transition::Waiting::Working::::WayPoint::1"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>1</id>
-                <specialid>2</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-        </waypoints>
-        <hidden>false</hidden>
-        <Transitions>
-            <Transition>
-                <trigger>revisionComplete()</trigger>
-                <guard/>
-                <post/>
-                <edgeproperty id="revisionComplete()/"
-                    sizeCalculated="true" type="TransitionLabel"
-                    userDefined="false" visible="true">
-                    <name>revisionComplete()/</name>
-                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                        <userOffsetX>0.0</userOffsetX>
-                        <userOffsetY>0.0</userOffsetY>
-                        <offsetX>0.0</offsetX>
-                        <offsetY>10.0</offsetY>
-                        <related length="2">
-                            <related0>transition::Waiting::Working::::WayPoint::0</related0>
-                            <related1>transition::Waiting::Working::::WayPoint::1</related1>
                         </related>
                     </strategy>
                     <hidden>false</hidden>
