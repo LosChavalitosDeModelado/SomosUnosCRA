@@ -1,0 +1,59 @@
+reset
+!new CRA('cra')
+-------------------------------------------------
+!new Operario('op1')
+!new Operario('op2')
+!new Dispositivo('d1')
+!new Dispositivo('d2')
+
+!insert (d1, op1) into DispositivoOperario
+!insert (d2, op2) into DispositivoOperario
+
+!insert (cra, d1) into Administracion
+!insert (cra, d2) into Administracion
+-------------------------------------------------
+!new Noria('noria')
+!noria.street:='Calle1'
+!insert (cra, noria) into Monitoriza
+
+!new Vehiculo('n1')
+!n1.number:=1
+!insert (noria, n1) into AtraccionVehiculo
+!new Vehiculo('n2')
+!n2.number:=2
+!insert (noria, n2) into AtraccionVehiculo
+!new Vehiculo('n3')
+!n3.number:=3
+!insert (noria, n3) into AtraccionVehiculo
+!new Vehiculo('n4')
+!n4.number:=4
+!insert (noria, n4) into AtraccionVehiculo
+!new Vehiculo('n5')
+!n5.number:=5
+!insert (noria, n5) into AtraccionVehiculo
+
+-------------------------------------------------
+!new Rusa('rusa')
+!insert (cra, rusa) into Monitoriza
+
+!new Vehiculo('r1')
+!r1.number:=1
+!insert (rusa, r1) into AtraccionVehiculo
+!new Vehiculo('r2')
+!r2.number:=2
+!insert (rusa, r2) into AtraccionVehiculo
+!new Vehiculo('r3')
+!r3.number:=3
+!insert (rusa, r3) into AtraccionVehiculo
+
+
+-------------------------------------------------
+--Parque de atracciones completo
+--Empiezan las averias
+-------------------------------------------------
+!n1.errorDetected()
+!n2.errorDetected()
+!r1.errorDetected()
+--!new Arregla('ar')
+--!insert (ar,n1) into ArreglaVehiculo;
+--!insert (ar,d1) into ArreglaDispositivo;

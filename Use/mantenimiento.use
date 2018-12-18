@@ -14,10 +14,10 @@ class CRA
       end
     end
 
-    pre AtraccionNoFunciona: a.working=false
-    pre VehiculoNoFunciona: v.isWorking=false
+    pre AtraccionNoFunciona: not a.working
+    pre VehiculoNoFunciona: not v.isWorking
     pre VehiculoNoEstaSiendoAtendido : v.arregla->select(a|a.fixed=false)->size()=0
-    pre VehiculoSinSenal: v. signalWaitingOperator =false
+    pre VehiculoSinSenal: not v.signalWaitingOperator
 
 
  revisionComplete(d:Dispositivo)
@@ -30,34 +30,35 @@ class CRA
         d.fixVehicle(v,v.atraccion);
       end
      end
-     pre OperarioDisponible: d.isAvailable=true
+     pre OperarioDisponible: d.isAvailable
   	
 end
 
 class Dispositivo
   attributes
     avisosResueltos: Integer derive=self.arregla->select(a|a.fixed)->size()
-    isAvailable: Boolean derive=self.arregla.exists(a|not a.fixed)
+    isAvailable: Boolean derive=self.arregla->size()>=1 implies self.arregla.forAll(a|a.fixed)
   operations
     fixVehicle(v:Vehiculo, a:Atraccion)
       begin
         declare ar:Arregla;
         ar:= new Arregla;
         --self.isAvailable :=false;
+        ar.fixed:=false;
         insert (ar,v) into ArreglaVehiculo;
         insert (ar,self) into ArreglaDispositivo;
       end
-      pre VehiculoNoFuncionando: v.isWorking=false
-      pre AtraccionNoFuncionando: a.working=false
+      pre VehiculoNoFuncionando: not v.isWorking
+      pre AtraccionNoFuncionando: not a.working
       pre VehiculoNoEstaSiendoAtendido : v.arregla->select(a|a.fixed=false)->size()=0
-      pre DispositivoDisponible : self. isAvailable=true
+      pre DispositivoDisponible : self.isAvailable
 
-      post VehiculoConUnArreglaMas: self.avisosResueltos =self.avisosResueltos@pre + 1
+      
       post HayUnArreglaActivo: v.arregla->select(a|a.fixed=false)->size()=1
-      post OperarioDisponible: self.isAvailable=false
-      post VehiculoNoFunciona: v.isWorking=false
-      post AtraccionNoFunciona: a.working=false
-       
+      post OperarioDisponible: not self.isAvailable
+      post VehiculoNoFunciona: not v.isWorking
+      post AtraccionNoFunciona: not a.working
+      
 	
 
 
@@ -67,13 +68,13 @@ class Dispositivo
         self.arregla->select(a|a.fixed=false)->asSequence()->first().vehiculo.revisionComplete();
         self.arregla->select(a|a.fixed=false)->asSequence()->first().fixed:=true;
       end
-      pre OperarioArreglando: self.isAvailable=false
+      pre OperarioArreglando: not self.isAvailable
       pre UnArreglaActivo: self.arregla->select(a|a.fixed=false)->size()=1
-      pre VehiculoNoFuncionando: self.arregla->select(a|a.fixed=false)->asSequence()->first().vehiculo.isWorking=false
-      pre AtraccionNoFuncionando :self.arregla->select(a|a.fixed=false)->asSequence()->first().vehiculo.atraccion.working=false
-
-      post NoArreglaPendiente:self.arregla->select(a|a.fixed=false)->size()=0
-      post DispositivoDisponible: self.isAvailable=true
+      pre VehiculoNoFuncionando: self.arregla->select(a|not a.fixed)->asSequence()->first().vehiculo.isWorking=false
+      pre AtraccionNoFuncionando :self.arregla->select(a|not a.fixed)->asSequence()->first().vehiculo.atraccion.working=false
+      post VehiculoConUnArreglaMas: self.avisosResueltos =self.avisosResueltos@pre + 1
+      post NoArreglaPendiente:self.arregla->select(a|not a.fixed)->size()=0
+      post DispositivoDisponible: self.isAvailable
       
       
   statemachines
@@ -103,18 +104,18 @@ class Atraccion
        --self.working := false
       end
     pre isMine:self.vehiculos->exists(c| c=v)
-    pre isBroken: v.isWorking=false
-    post stop: self.working = false
+    pre isBroken: not v.isWorking
+    post stop: not self.working
 
     revisionComplete(v:Vehiculo)
       begin
-       --if self.vehiculos->forAll(c|c.isWorking=true) then
+       --if self.vehiculos->forAll(c|c.isWorkingg) then
        --    self.working := true;
        --end
       end
-    pre isMine: self.vehiculos->exists(c| c=v)
-    pre isFixed: v.isWorking=true
-    post state: if self.vehiculos->forAll(c|c.isWorking=true) then self.working = true else self.working = false endif
+    pre isMine: self.vehiculos->exists(c|c=v)
+    pre isFixed: v.isWorking
+    post state: if self.vehiculos->forAll(c|c.isWorking) then self.working else not self.working endif
 
   statemachines
     psm Working
@@ -127,6 +128,7 @@ class Atraccion
         Working->Broken {errorDetected()}
         Broken->Working {[self.allWorking()] revisionComplete()}
         Broken->Broken {[not self.allWorking()] revisionComplete()}
+        Broken->Broken {errorDetected()}
     end
 end
 
@@ -139,22 +141,22 @@ end
 class Vehiculo
   attributes
     number: Integer
-    isWorking: Boolean
+    isWorking: Boolean init: true
     signalWaitingOperator: Boolean init: false
   operations
     signalNotAttended()
       begin
 	      self.signalWaitingOperator:=true;
       end
-      pre VehiculoNofunciona: self.isWorking =false
-      pre VehiculoSinSenal : self.signalWaitingOperator=false
-      pre NoArreglasActivos : self.arregla->select(a|a.fixed=false)->size()=0
-      pre AtraccionNoFunciona: self.atraccion.working=false
+      pre VehiculoNofunciona: not self.isWorking 
+      pre VehiculoSinSenal : not self.signalWaitingOperator
+      pre NoArreglasActivos : self.arregla->select(a|not a.fixed)->size()=0
+      pre AtraccionNoFunciona: not self.atraccion.working
 
-      post SenalActiva: self.signalWaitingOperator=true
-      post VehiculoNofuncionaTodavia: self.isWorking =false
-      post AtraccionNoFuncionaTodavia: self.atraccion.working=false
-      post NoArreglasActivosTodavia: self.arregla->select(a|a.fixed=false)->size()=0
+      post SenalActiva: self.signalWaitingOperator
+      post VehiculoNofuncionaTodavia: not self.isWorking
+      post AtraccionNoFuncionaTodavia: not self.atraccion.working
+      post NoArreglasActivosTodavia: self.arregla->select(a|not a.fixed)->size()=0
 
       
     errorDetected()
@@ -163,35 +165,35 @@ class Vehiculo
         self.atraccion.errorDetected(self);
         self.atraccion.cra.errorDetected(self, self.atraccion);
       end
-      pre VehiculoFuncionando: self.isWorking=true
-      pre VehiculoSinSenal: self.signalWaitingOperator=false
-      pre NoArreglasActivos:self.arregla->select(a|a.fixed=false)->size()=0
-      post VehiculoNoFuncionando: self.isWorking=false
-      post AtraccionNoFuncionando: self.atraccion.working=false
+      pre VehiculoFuncionando: self.isWorking
+      pre VehiculoSinSenal: not self.signalWaitingOperator
+      pre NoArreglasActivos:self.arregla->select(a|not a.fixed)->size()=0
+      post VehiculoNoFuncionando: not self.isWorking
+      post AtraccionNoFuncionando: not self.atraccion.working
       
       
     revisionComplete()
       begin
 	      self.isWorking:=true
       end
-      pre NoArreglasActivos: self.arregla->select(a|a.fixed=false)->size()=0
-      pre VehiculoSiendoAtendido:self.signalWaitingOperator=false
-      post VehiculoFuncionando : self.isWorking=true
-      post NoSenalActiva: self.signalWaitingOperator=false
+      pre NoArreglasActivos: self.arregla->select(a|not a.fixed)->size()=0
+      pre VehiculoSiendoAtendido: not self.signalWaitingOperator
+      post VehiculoFuncionando : self.isWorking
+      post NoSenalActiva: not self.signalWaitingOperator
       
     signalAttended()
       begin
 	      self.signalWaitingOperator:=false
       end
-      pre VehiculoNoFunciona :self.isWorking=false
-      pre SenalNoAtendida :self.signalWaitingOperator=true
-      pre OperarioAsignado:self.arregla->select(a|a.fixed=false)->size()=1
-      pre AtraccionNoFunciona :self.atraccion.working=false
+      pre VehiculoNoFunciona: not self.isWorking
+      pre SenalNoAtendida: self.signalWaitingOperator
+      pre OperarioAsignado:self.arregla->select(a|not a.fixed)->size()=1
+      pre AtraccionNoFunciona: not self.atraccion.working
       
-      post signalAttended: self.signalWaitingOperator=false
-      pre VehiculoNoFuncionaTodavia :self.isWorking=false
-      pre AtraccionNoFuncionaTodavia :self.atraccion.working=false
-      pre OperarioAsignadoTodavia:self.arregla->select(a|a.fixed=false)->size()=1
+      post signalAttended: not self.signalWaitingOperator
+      post VehiculoNoFuncionaTodavia: not self.isWorking
+      post AtraccionNoFuncionaTodavia: not self.atraccion.working
+      post OperarioAsignadoTodavia:self.arregla->select(a|not a.fixed)->size()=1
       
 	
   statemachines
@@ -203,8 +205,8 @@ class Vehiculo
         Waiting [not self.isWorking and self.signalWaitingOperator]
       transitions
         s->Working
-        Working->Broken {errorDetected()}
-        Broken->Waiting {signalNotAttended()}
+        Working->Broken {[self.atraccion.cra.dispositivos->select(d|d.isAvailable)->size()>0] errorDetected()}
+        Working->Waiting {[self.atraccion.cra.dispositivos->select(d|d.isAvailable)->size()=0] errorDetected()}
         Broken->Working {revisionComplete()}
         Waiting->Broken {signalAttended()}
     end
