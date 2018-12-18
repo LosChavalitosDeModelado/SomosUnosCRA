@@ -22,8 +22,12 @@ class CRA
 
  revisionComplete(d:Dispositivo)
      begin
-	if Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->size()>0 then
-	Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->asSequence()->first().senalAtendida()
+	if Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->size()>0 
+	then
+	declare v:Vehiculo;
+	v:=Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->asSequence()->first();
+	v.senalAtendida();
+	d.fixVehicle(v,v.atraccion);
 	else end
 	
      end
