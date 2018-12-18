@@ -54,6 +54,62 @@
         <hidden>false</hidden>
     </node>
     <edge type="Transition">
+        <source>Occupied</source>
+        <target>Free</target>
+        <name>[(Vehiculo.allInstances-&gt;select(v : Vehiculo | (v.signalWaitingOperator = true))-&gt;size = 0)] finishRevision()/</name>
+        <waypoints>
+            <edgeproperty id="transition::Occupied::Free::::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="transition::Occupied::Free::::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <Transitions>
+            <Transition>
+                <trigger>finishRevision()</trigger>
+                <guard>(Vehiculo.allInstances-&gt;select(v : Vehiculo | (v.signalWaitingOperator = true))-&gt;size = 0)</guard>
+                <post/>
+                <edgeproperty
+                    id="[(Vehiculo.allInstances->select(v : Vehiculo | (v.signalWaitingOperator = true))->size = 0)] finishRevision()/"
+                    sizeCalculated="true" type="TransitionLabel"
+                    userDefined="true" visible="true">
+                    <name>[(Vehiculo.allInstances-&gt;select(v : Vehiculo | (v.signalWaitingOperator = true))-&gt;size = 0)] finishRevision()/</name>
+                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                        <userOffsetX>55.0</userOffsetX>
+                        <userOffsetY>-48.0</userOffsetY>
+                        <offsetX>0.0</offsetX>
+                        <offsetY>10.0</offsetY>
+                        <related length="2">
+                            <related0>transition::Occupied::Free::::WayPoint::0</related0>
+                            <related1>transition::Occupied::Free::::WayPoint::1</related1>
+                        </related>
+                    </strategy>
+                    <hidden>false</hidden>
+                </edgeproperty>
+            </Transition>
+        </Transitions>
+    </edge>
+    <edge type="Transition">
         <source>Free</source>
         <target>Occupied</target>
         <name>fixVehicle(v : Vehiculo, a : Atraccion)/</name>
@@ -102,6 +158,60 @@
                         <related length="2">
                             <related0>transition::Free::Occupied::::WayPoint::0</related0>
                             <related1>transition::Free::Occupied::::WayPoint::1</related1>
+                        </related>
+                    </strategy>
+                    <hidden>false</hidden>
+                </edgeproperty>
+            </Transition>
+        </Transitions>
+    </edge>
+    <edge type="Transition">
+        <source>s</source>
+        <target>Free</target>
+        <name>/</name>
+        <waypoints>
+            <edgeproperty id="transition::s::Free::::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty id="transition::s::Free::::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <Transitions>
+            <Transition>
+                <trigger/>
+                <guard/>
+                <post/>
+                <edgeproperty id="/" sizeCalculated="true"
+                    type="TransitionLabel" userDefined="false" visible="true">
+                    <name>/</name>
+                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                        <userOffsetX>0.0</userOffsetX>
+                        <userOffsetY>0.0</userOffsetY>
+                        <offsetX>0.0</offsetX>
+                        <offsetY>10.0</offsetY>
+                        <related length="2">
+                            <related0>transition::s::Free::::WayPoint::0</related0>
+                            <related1>transition::s::Free::::WayPoint::1</related1>
                         </related>
                     </strategy>
                     <hidden>false</hidden>
@@ -240,116 +350,6 @@
                         <related length="2">
                             <related0>transition::Occupied::Occupied::::WayPoint::0</related0>
                             <related1>transition::Occupied::Occupied::::WayPoint::4</related1>
-                        </related>
-                    </strategy>
-                    <hidden>false</hidden>
-                </edgeproperty>
-            </Transition>
-        </Transitions>
-    </edge>
-    <edge type="Transition">
-        <source>s</source>
-        <target>Free</target>
-        <name>/</name>
-        <waypoints>
-            <edgeproperty id="transition::s::Free::::WayPoint::0"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>0</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>0</id>
-                <specialid>1</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="transition::s::Free::::WayPoint::1"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>1</id>
-                <specialid>2</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-        </waypoints>
-        <hidden>false</hidden>
-        <Transitions>
-            <Transition>
-                <trigger/>
-                <guard/>
-                <post/>
-                <edgeproperty id="/" sizeCalculated="true"
-                    type="TransitionLabel" userDefined="false" visible="true">
-                    <name>/</name>
-                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                        <userOffsetX>0.0</userOffsetX>
-                        <userOffsetY>0.0</userOffsetY>
-                        <offsetX>0.0</offsetX>
-                        <offsetY>10.0</offsetY>
-                        <related length="2">
-                            <related0>transition::s::Free::::WayPoint::0</related0>
-                            <related1>transition::s::Free::::WayPoint::1</related1>
-                        </related>
-                    </strategy>
-                    <hidden>false</hidden>
-                </edgeproperty>
-            </Transition>
-        </Transitions>
-    </edge>
-    <edge type="Transition">
-        <source>Occupied</source>
-        <target>Free</target>
-        <name>[(Vehiculo.allInstances-&gt;select(v : Vehiculo | (v.signalWaitingOperator = true))-&gt;size = 0)] finishRevision()/</name>
-        <waypoints>
-            <edgeproperty id="transition::Occupied::Free::::WayPoint::0"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>0</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>0</id>
-                <specialid>1</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty id="transition::Occupied::Free::::WayPoint::1"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>1</id>
-                <specialid>2</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-        </waypoints>
-        <hidden>false</hidden>
-        <Transitions>
-            <Transition>
-                <trigger>finishRevision()</trigger>
-                <guard>(Vehiculo.allInstances-&gt;select(v : Vehiculo | (v.signalWaitingOperator = true))-&gt;size = 0)</guard>
-                <post/>
-                <edgeproperty
-                    id="[(Vehiculo.allInstances->select(v : Vehiculo | (v.signalWaitingOperator = true))->size = 0)] finishRevision()/"
-                    sizeCalculated="true" type="TransitionLabel"
-                    userDefined="true" visible="true">
-                    <name>[(Vehiculo.allInstances-&gt;select(v : Vehiculo | (v.signalWaitingOperator = true))-&gt;size = 0)] finishRevision()/</name>
-                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                        <userOffsetX>55.0</userOffsetX>
-                        <userOffsetY>-48.0</userOffsetY>
-                        <offsetX>0.0</offsetX>
-                        <offsetY>10.0</offsetY>
-                        <related length="2">
-                            <related0>transition::Occupied::Free::::WayPoint::0</related0>
-                            <related1>transition::Occupied::Free::::WayPoint::1</related1>
                         </related>
                     </strategy>
                     <hidden>false</hidden>

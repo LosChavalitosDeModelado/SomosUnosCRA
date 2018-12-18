@@ -35,6 +35,15 @@
         </node>
         <hidden>false</hidden>
     </node>
+    <node id="Waiting" sizeCalculated="true" type="StateNode">
+        <name>Waiting</name>
+        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
+            <x>446.45268561119383</x>
+            <y>8.914472122226812</y>
+        </strategy>
+        <showInvariant>true</showInvariant>
+        <hidden>false</hidden>
+    </node>
     <node id="Working" sizeCalculated="true" type="StateNode">
         <name>Working</name>
         <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
@@ -53,15 +62,64 @@
         <showInvariant>true</showInvariant>
         <hidden>false</hidden>
     </node>
-    <node id="Waiting" sizeCalculated="true" type="StateNode">
-        <name>Waiting</name>
-        <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyFixed">
-            <x>446.45268561119383</x>
-            <y>8.914472122226812</y>
-        </strategy>
-        <showInvariant>true</showInvariant>
+    <edge type="Transition">
+        <source>Working</source>
+        <target>Waiting</target>
+        <name>[(self.atraccion.cra.dispositivos-&gt;select(d : Dispositivo | d.isAvailable)-&gt;size = 0)] errorDetected()/</name>
+        <waypoints>
+            <edgeproperty
+                id="transition::Working::Waiting::::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="transition::Working::Waiting::::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
         <hidden>false</hidden>
-    </node>
+        <Transitions>
+            <Transition>
+                <trigger>errorDetected()</trigger>
+                <guard>(self.atraccion.cra.dispositivos-&gt;select(d : Dispositivo | d.isAvailable)-&gt;size = 0)</guard>
+                <post/>
+                <edgeproperty
+                    id="[(self.atraccion.cra.dispositivos->select(d : Dispositivo | d.isAvailable)->size = 0)] errorDetected()/"
+                    sizeCalculated="true" type="TransitionLabel"
+                    userDefined="true" visible="true">
+                    <name>[(self.atraccion.cra.dispositivos-&gt;select(d : Dispositivo | d.isAvailable)-&gt;size = 0)] errorDetected()/</name>
+                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                        <userOffsetX>35.0</userOffsetX>
+                        <userOffsetY>-50.0</userOffsetY>
+                        <offsetX>0.0</offsetX>
+                        <offsetY>10.0</offsetY>
+                        <related length="2">
+                            <related0>transition::Working::Waiting::::WayPoint::0</related0>
+                            <related1>transition::Working::Waiting::::WayPoint::1</related1>
+                        </related>
+                    </strategy>
+                    <hidden>false</hidden>
+                </edgeproperty>
+            </Transition>
+        </Transitions>
+    </edge>
     <edge type="Transition">
         <source>Working</source>
         <target>Broken</target>
@@ -113,6 +171,63 @@
                         <related length="2">
                             <related0>transition::Working::Broken::::WayPoint::0</related0>
                             <related1>transition::Working::Broken::::WayPoint::1</related1>
+                        </related>
+                    </strategy>
+                    <hidden>false</hidden>
+                </edgeproperty>
+            </Transition>
+        </Transitions>
+    </edge>
+    <edge type="Transition">
+        <source>Waiting</source>
+        <target>Broken</target>
+        <name>signalAttended()/</name>
+        <waypoints>
+            <edgeproperty
+                id="transition::Waiting::Broken::::WayPoint::0"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>0</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>0</id>
+                <specialid>1</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+            <edgeproperty
+                id="transition::Waiting::Broken::::WayPoint::1"
+                sizeCalculated="true" type="WayPoint"
+                userDefined="false" visible="true">
+                <name>1</name>
+                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
+                    <userOffsetX>0.0</userOffsetX>
+                    <userOffsetY>0.0</userOffsetY>
+                </strategy>
+                <id>1</id>
+                <specialid>2</specialid>
+                <hidden>false</hidden>
+            </edgeproperty>
+        </waypoints>
+        <hidden>false</hidden>
+        <Transitions>
+            <Transition>
+                <trigger>signalAttended()</trigger>
+                <guard/>
+                <post/>
+                <edgeproperty id="signalAttended()/"
+                    sizeCalculated="true" type="TransitionLabel"
+                    userDefined="true" visible="true">
+                    <name>signalAttended()/</name>
+                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
+                        <userOffsetX>55.0</userOffsetX>
+                        <userOffsetY>-5.0</userOffsetY>
+                        <offsetX>0.0</offsetX>
+                        <offsetY>10.0</offsetY>
+                        <related length="2">
+                            <related0>transition::Waiting::Broken::::WayPoint::0</related0>
+                            <related1>transition::Waiting::Broken::::WayPoint::1</related1>
                         </related>
                     </strategy>
                     <hidden>false</hidden>
@@ -178,64 +293,6 @@
         </Transitions>
     </edge>
     <edge type="Transition">
-        <source>Working</source>
-        <target>Waiting</target>
-        <name>[(self.atraccion.cra.dispositivos-&gt;select(d : Dispositivo | d.isAvailable)-&gt;size = 0)] errorDetected()/</name>
-        <waypoints>
-            <edgeproperty
-                id="transition::Working::Waiting::::WayPoint::0"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>0</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>0</id>
-                <specialid>1</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="transition::Working::Waiting::::WayPoint::1"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>1</id>
-                <specialid>2</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-        </waypoints>
-        <hidden>false</hidden>
-        <Transitions>
-            <Transition>
-                <trigger>errorDetected()</trigger>
-                <guard>(self.atraccion.cra.dispositivos-&gt;select(d : Dispositivo | d.isAvailable)-&gt;size = 0)</guard>
-                <post/>
-                <edgeproperty
-                    id="[(self.atraccion.cra.dispositivos->select(d : Dispositivo | d.isAvailable)->size = 0)] errorDetected()/"
-                    sizeCalculated="true" type="TransitionLabel"
-                    userDefined="true" visible="true">
-                    <name>[(self.atraccion.cra.dispositivos-&gt;select(d : Dispositivo | d.isAvailable)-&gt;size = 0)] errorDetected()/</name>
-                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                        <userOffsetX>35.0</userOffsetX>
-                        <userOffsetY>-50.0</userOffsetY>
-                        <offsetX>0.0</offsetX>
-                        <offsetY>10.0</offsetY>
-                        <related length="2">
-                            <related0>transition::Working::Waiting::::WayPoint::0</related0>
-                            <related1>transition::Working::Waiting::::WayPoint::1</related1>
-                        </related>
-                    </strategy>
-                    <hidden>false</hidden>
-                </edgeproperty>
-            </Transition>
-        </Transitions>
-    </edge>
-    <edge type="Transition">
         <source>s</source>
         <target>Working</target>
         <name>/</name>
@@ -282,63 +339,6 @@
                         <related length="2">
                             <related0>transition::s::Working::::WayPoint::0</related0>
                             <related1>transition::s::Working::::WayPoint::1</related1>
-                        </related>
-                    </strategy>
-                    <hidden>false</hidden>
-                </edgeproperty>
-            </Transition>
-        </Transitions>
-    </edge>
-    <edge type="Transition">
-        <source>Waiting</source>
-        <target>Broken</target>
-        <name>signalAttended()/</name>
-        <waypoints>
-            <edgeproperty
-                id="transition::Waiting::Broken::::WayPoint::0"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>0</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>0</id>
-                <specialid>1</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-            <edgeproperty
-                id="transition::Waiting::Broken::::WayPoint::1"
-                sizeCalculated="true" type="WayPoint"
-                userDefined="false" visible="true">
-                <name>1</name>
-                <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyAttachedIntersection">
-                    <userOffsetX>0.0</userOffsetX>
-                    <userOffsetY>0.0</userOffsetY>
-                </strategy>
-                <id>1</id>
-                <specialid>2</specialid>
-                <hidden>false</hidden>
-            </edgeproperty>
-        </waypoints>
-        <hidden>false</hidden>
-        <Transitions>
-            <Transition>
-                <trigger>signalAttended()</trigger>
-                <guard/>
-                <post/>
-                <edgeproperty id="signalAttended()/"
-                    sizeCalculated="true" type="TransitionLabel"
-                    userDefined="true" visible="true">
-                    <name>signalAttended()/</name>
-                    <strategy type="org.tzi.use.gui.views.diagrams.elements.positioning.StrategyInBetween">
-                        <userOffsetX>55.0</userOffsetX>
-                        <userOffsetY>-5.0</userOffsetY>
-                        <offsetX>0.0</offsetX>
-                        <offsetY>10.0</offsetY>
-                        <related length="2">
-                            <related0>transition::Waiting::Broken::::WayPoint::0</related0>
-                            <related1>transition::Waiting::Broken::::WayPoint::1</related1>
                         </related>
                     </strategy>
                     <hidden>false</hidden>

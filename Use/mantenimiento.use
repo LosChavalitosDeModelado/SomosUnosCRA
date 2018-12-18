@@ -252,3 +252,21 @@ association DispositivoOperario between
 end
 
 constraints
+
+context Dispositivo inv soloArreglaUno:
+self.arregla->select(a:Arregla|not a.fixed)->isUnique(a:Arregla|not a.fixed)
+
+context Vehiculo inv ambosSinFuncionar:
+(not self.isWorking) implies (not self.atraccion.working)
+
+context Vehiculo inv atraccionNoFuncionaWhileVehiculoAtendido:
+self.arregla->exists(a:Arregla|not a.fixed) implies not self.atraccion.working
+
+context Vehiculo inv vehiculoArreglandoNoEsperaOperario:
+self.isWorking implies not self.signalWaitingOperator
+
+context Dispositivo inv OperarioOcupadoArreglando:
+not self.isAvailable implies self.arregla->select(a|not a.fixed)->size=1
+
+context CRA inv singleton:
+CRA.allInstances->size()<=1
