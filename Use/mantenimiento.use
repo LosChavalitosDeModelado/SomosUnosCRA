@@ -44,7 +44,6 @@ class Dispositivo
       begin
         declare ar:Arregla;
         ar:= new Arregla;
-        --self.isAvailable :=false;
         ar.fixed:=false;
         insert (ar,v) into ArreglaVehiculo;
         insert (ar,self) into ArreglaDispositivo;
@@ -65,7 +64,6 @@ class Dispositivo
 
     finishRevision()
       begin
-        --self.isAvailable:=false;
         declare ar:Arregla;
         ar:=self.arregla->select(a|not a.fixed)->asSequence()->first();
         ar.fixed:=true;
@@ -108,7 +106,6 @@ class Atraccion
     allWorking():Boolean = self.vehiculos->forAll(v|v.isWorking)
     errorDetected(v:Vehiculo)
       begin
-       --self.working := false
       end
     pre isMine:self.vehiculos->exists(c| c=v)
     pre isBroken: not v.isWorking
@@ -116,9 +113,6 @@ class Atraccion
 
     revisionComplete(v:Vehiculo)
       begin
-       --if self.vehiculos->forAll(c|c.isWorking) then
-       --    self.working := true;
-       --end
       end
     pre isMine: self.vehiculos->exists(c|c=v)
     pre isFixed: v.isWorking
@@ -181,7 +175,8 @@ class Vehiculo
       
     revisionComplete()
       begin
-	      self.isWorking:=true
+	      self.isWorking:=true;
+        self.atraccion.revisionComplete(self);
       end
       pre NoArreglasActivos: self.arregla->select(a|not a.fixed)->size()=0
       pre VehiculoSiendoAtendido: not self.signalWaitingOperator

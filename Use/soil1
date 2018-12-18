@@ -58,3 +58,6 @@ reset
 !d1.finishRevision()
 !d2.finishRevision()
 !d1.finishRevision()
+
+!n1.errorDetected()
+!n2.errorDetected()
