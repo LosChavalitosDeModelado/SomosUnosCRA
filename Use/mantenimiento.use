@@ -26,8 +26,9 @@ class CRA
       then
         declare v:Vehiculo;
         v:=Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->asSequence()->first();
-        v.signalAttended();
         d.fixVehicle(v,v.atraccion);
+        v.signalAttended();
+        
       end
      end
      pre OperarioDisponible: d.isAvailable
@@ -65,16 +66,20 @@ class Dispositivo
     finishRevision()
       begin
         --self.isAvailable:=false;
-        self.arregla->select(a|a.fixed=false)->asSequence()->first().vehiculo.revisionComplete();
-        self.arregla->select(a|a.fixed=false)->asSequence()->first().fixed:=true;
+        declare ar:Arregla;
+        ar:=self.arregla->select(a|not a.fixed)->asSequence()->first();
+        ar.fixed:=true;
+        ar.vehiculo.revisionComplete();
+        self.cra.revisionComplete(self);
       end
       pre OperarioArreglando: not self.isAvailable
-      pre UnArreglaActivo: self.arregla->select(a|a.fixed=false)->size()=1
+      pre UnArreglaActivo: self.arregla->select(a|not a.fixed)->size()=1
       pre VehiculoNoFuncionando: self.arregla->select(a|not a.fixed)->asSequence()->first().vehiculo.isWorking=false
       pre AtraccionNoFuncionando :self.arregla->select(a|not a.fixed)->asSequence()->first().vehiculo.atraccion.working=false
       post VehiculoConUnArreglaMas: self.avisosResueltos =self.avisosResueltos@pre + 1
-      post NoArreglaPendiente:self.arregla->select(a|not a.fixed)->size()=0
-      post DispositivoDisponible: self.isAvailable
+      --no tienen por que cumplirse ya que le pueden asignar otro trabajo directamente
+      --post NoArreglaPendiente:self.arregla->select(a|not a.fixed)->size()=0
+      --post DispositivoDisponible: self.isAvailable
       
       
   statemachines
@@ -86,7 +91,9 @@ class Dispositivo
       transitions
        s->Free
        Free->Occupied{fixVehicle()}
-       Occupied->Free{finishRevision()}
+       Occupied->Free{[Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->size()=0 ] finishRevision()}
+       Occupied->Occupied{[Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->size()>0 ] finishRevision()}
+
   end
 end
 
@@ -109,7 +116,7 @@ class Atraccion
 
     revisionComplete(v:Vehiculo)
       begin
-       --if self.vehiculos->forAll(c|c.isWorkingg) then
+       --if self.vehiculos->forAll(c|c.isWorking) then
        --    self.working := true;
        --end
       end

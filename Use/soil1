@@ -54,6 +54,7 @@ reset
 !n1.errorDetected()
 !n2.errorDetected()
 !r1.errorDetected()
---!new Arregla('ar')
---!insert (ar,n1) into ArreglaVehiculo;
---!insert (ar,d1) into ArreglaDispositivo;
+
+!d1.finishRevision()
+!d2.finishRevision()
+!d1.finishRevision()
