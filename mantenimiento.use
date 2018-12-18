@@ -20,9 +20,15 @@ class CRA
     pre VehiculoSinSenal: v. signalWaitingOperator =false
 
 
-  revisionComplete(o:Operario, a:Atraccion)
-     
+ revisionComplete(d:Dispositivo)
+     begin
+	if Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->size()>0 then
+	Vehiculo.allInstances()->select(v|v.signalWaitingOperator=true)->asSequence()->first().senalAtendida()
+	else end
 	
+     end
+     pre OperarioDisponible: d.isAvailable=true
+  	
 end
 
 class Dispositivo
