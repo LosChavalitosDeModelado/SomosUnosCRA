@@ -17,7 +17,7 @@
     <ownedAttribute xmi:type="uml:Property" xmi:id="_BYxVEAIhEemq4foq0apf6g" name="street" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_ks04kAIhEemq4foq0apf6g" name="working" visibility="private">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ks04kAIhEemq4foq0apf6g" name="working" visibility="private" isDerived="true">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
     </ownedAttribute>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_pdDGUAIhEemq4foq0apf6g" name="allWorking"/>
